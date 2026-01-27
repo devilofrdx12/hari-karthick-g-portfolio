@@ -1,0 +1,19 @@
+:root {
+  --bg-sky: #ffffff;
+  --bg-ground: #a9d6ff;
+
+  --bg: #ffffff;
+  --text: #222222;
+  --accent: #f7941d;
+
+  --font-body: "Zen Kaku Gothic New", sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg-sky: #0c0c0c;
+  --bg-ground: #0f3554;
+
+  --bg: #0e1b2e;
+  --text: #ffffff;
+  --accent: #9fe7ff;
+}

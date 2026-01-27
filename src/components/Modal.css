@@ -1,0 +1,49 @@
+.modal-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+
+.modal-window {
+  width: min(90vw, 520px);
+  background: var(--bg);
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+  pointer-events: auto;
+  overflow: hidden;
+  cursor: grab;
+}
+
+[data-theme="dark"] .modal-window {
+  border-color: rgba(255,255,255,0.2);
+}
+
+.modal-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-bar button {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.modal-content {
+  padding: 1.5rem;
+  cursor: default;
+}
+
+.modal-window {
+  will-change: transform, opacity;
+}

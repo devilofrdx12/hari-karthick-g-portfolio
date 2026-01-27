@@ -56,3 +56,24 @@ body {
   display: flex;
   gap: 0.8rem;
 }
+
+/* Image-based theme icons (sun / moon) */
+.ui-img-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  transition:
+    transform 0.25s ease,
+    opacity 0.2s ease;
+}
+
+/* Hover animation for image icons */
+.control-btn:hover .ui-img-icon {
+  transform: scale(1.15) rotate(-8deg);
+  opacity: 0.9;
+}
+
+/* Active (click) state */
+.control-btn:active .ui-img-icon {
+  transform: scale(0.95);
+}

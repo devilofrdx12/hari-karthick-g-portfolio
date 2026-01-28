@@ -17,15 +17,15 @@ export default function DesktopGrid() {
     <>
       <div className="desktop-wrapper">
         <div className="main-window">
-          <div className="window-bar">home</div>
+          <div className="window-bar">Home</div>
 
           <div className="window-content">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              hi! <span>i’m shar</span>
+              hola! <span>i’m Hari Karthick G</span>
             </motion.h1>
 
             <motion.p
@@ -33,7 +33,7 @@ export default function DesktopGrid() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.15 }}
             >
-              illustrator · animator · developer
+              Engineer | Artist | Video Editor
             </motion.p>
 
             <div className="icon-grid">

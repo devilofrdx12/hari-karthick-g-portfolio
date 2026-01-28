@@ -40,10 +40,17 @@
 }
 
 .modal-content {
+  color: inherit;
   padding: 1.5rem;
   cursor: default;
 }
 
 .modal-window {
+  color: var(--text);
   will-change: transform, opacity;
 }
+
+[data-theme="dark"] .modal-window {
+  color: #e6edf3; /* soft white */
+}
+

@@ -33,7 +33,7 @@ export default function DesktopGrid() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.15 }}
             >
-              Engineer | Artist | Video Editor
+              engineer | artist | video editor
             </motion.p>
 
             <div className="icon-grid">

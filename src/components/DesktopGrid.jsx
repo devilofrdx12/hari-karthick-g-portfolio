@@ -13,9 +13,6 @@ const items = [
 export default function DesktopGrid() {
   const [openWindows, setOpenWindows] = useState([]);
   const [activeWindow, setActiveWindow] = useState(null);
-  const isTouch = typeof window !== "undefined"
-    && window.matchMedia("(pointer: coarse)").matches;
-
 
   const openWindow = (id) => {
     setOpenWindows(prev =>

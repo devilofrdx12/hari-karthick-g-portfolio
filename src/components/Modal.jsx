@@ -14,16 +14,15 @@ export default function Modal({ open, onClose, title, children, isActive, onFocu
             onPointerDown={onFocus}
             drag
             dragMomentum={false}
-            dragElastic={0.08}
+            dragElastic={0}
             initial={{ opacity: 0, scale: 0.96, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: 32 }}
-            transition={{
-              type: "spring",
-              stiffness: 420,
-              damping: 34,
-              mass: 0.6
-            }}
+            transition={
+              isTouch
+                ? { type: "tween", duration: 0.08, ease: "linear" }
+                : { type: "spring", stiffness: 420, damping: 34, mass: 0.65 }
+            }
           >
             <div className="window-bar modal-bar">
               <span>{title}</span>

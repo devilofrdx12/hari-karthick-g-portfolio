@@ -16,7 +16,7 @@
   box-shadow: 0 16px 40px rgba(0,0,0,0.25);
   pointer-events: auto;
   overflow: hidden;
-  cursor: grab;
+  cursor: default;
   z-index: 10;
   transition: box-shadow 0.25 ease;
 }
@@ -47,7 +47,7 @@
   border-radius: 6px;
   width: 26px;
   height: 26px;
-  cursor: pointer;
+  cursor: default;
 }
 
 .modal-content {

@@ -65,3 +65,6 @@
   color: #e6edf3; /* soft white */
 }
 
+.modal-window {
+  touch-action: none;
+}

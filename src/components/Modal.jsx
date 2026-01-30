@@ -12,7 +12,7 @@ export default function Modal({ open, onClose, title, children, isActive, onFocu
           <motion.div
             className={`modal-window ${isActive ? "active" : ""}`}
             onPointerDown={onFocus}
-            drag={!isTouch}
+            drag
             dragMomentum={false}
             dragElastic={0.08}
             initial={{ opacity: 0, scale: 0.96, y: 24 }}

@@ -38,26 +38,32 @@ export default function DesktopGrid() {
 
             <div className="icon-grid">
               {items.map(item => (
-                <motion.button
+                <button
                   key={item.id}
                   className="icon-btn"
-                  whileHover={{ scale: 1.08, y: -4 }}
-                  whileTap={{ scale: 0.96 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 420,
-                    damping: 30,
-                    mass: 0.5
-                  }}
                   onClick={() =>
                     setOpenWindows(prev =>
                       prev.includes(item.id) ? prev : [...prev, item.id]
                     )
                   }
                 >
-                  <div className="icon-outline" />
-                  <span>{item.label}</span>
-                </motion.button>
+                  <motion.div
+                    className="icon-motion"
+                    initial={false}
+                    animate={{ scale: 1, y: 0 }}
+                    whileHover={{ scale: 1.08, y: -4 }}
+                    whileTap={{ scale: 0.96, y: -2 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 420,
+                      damping: 32,
+                      mass: 0.65
+                    }}
+                  >
+                    <div className="icon-outline" />
+                    <span>{item.label}</span>
+                  </motion.div>
+                </button>
               ))}
             </div>
           </div>

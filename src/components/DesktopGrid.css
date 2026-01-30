@@ -104,7 +104,7 @@
   justify-content: flex-start;
   gap: 0.6rem;
   color: var(--text);
-  transition: color 0.4s ease,
+  transition: color 0.25s ease;
 
 }
 
@@ -117,22 +117,26 @@
   transition:
     border-color 0.4s ease,
     background-color 0.4s ease,
-    transform 0.3s ease;
-}
-
-.icon-btn span {
-  font-size: 0.9rem;
-  line-height: 1;
-  text-transform: lowercase;
 }
 
 .icon-btn span {
   margin-top: 0.2rem;
   font-size: 0.9rem;
   font-weight: 500;
-  color: #444; /* light mode text */
+  line-height: 1;
+  text-transform: lowercase;
+  color: #444;
   transition: color 0.25s ease;
 }
+
+.icon-motion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  will-change: transform;
+}
+
 
 [data-theme="dark"] .icon-btn span {
   color: #e6edf3; /* soft white, not pure white */

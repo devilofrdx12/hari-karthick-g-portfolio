@@ -20,7 +20,7 @@ export default function Modal({ open, onClose, title, children, isActive, onFocu
             exit={{ opacity: 0, scale: 0.97, y: 32 }}
             transition={
               isTouch
-                ? { type: "spring", duration: 0.08, ease: "linear" }
+                ? { type: "spring", stiffness: 420, damping: 40, mass: 0.65 }
                 : { type: "spring", stiffness: 420, damping: 34, mass: 0.65 }
             }
           >

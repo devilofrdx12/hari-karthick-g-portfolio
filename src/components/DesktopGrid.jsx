@@ -65,7 +65,7 @@ export default function DesktopGrid() {
                     className="icon-motion"
                     initial={false}
                     animate={{ scale: 1, y: 0 }}
-                    whileHover={!isTouch ? { scale: 1.08, y: -4 } : undefined}
+                    whileHover={{ scale: 1.08, y: -4 }}
                     whileTap={{ scale: 0.96, y: -2 }}
                     transition={{
                       type: "spring",

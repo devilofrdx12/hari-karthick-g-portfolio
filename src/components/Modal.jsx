@@ -11,7 +11,7 @@ export default function Modal({ open, onClose, title, children, isActive, onFocu
         <div className="modal-container">
           <motion.div
             className={`modal-window ${isActive ? "active" : ""}`}
-            onMouseDown={onFocus}
+            onPointerDown={onFocus}
             drag={!isTouch}
             dragMomentum={false}
             dragElastic={0.08}
@@ -25,14 +25,19 @@ export default function Modal({ open, onClose, title, children, isActive, onFocu
               mass: 0.6
             }}
           >
-
             <div className="window-bar modal-bar">
               <span>{title}</span>
-              <button onClick={onClose}>✕</button>
+              <button
+                onPointerDown={e => e.stopPropagation()}
+                onClick={onClose}
+              >
+                ✕
+              </button>
             </div>
 
             <div className="modal-content">{children}</div>
           </motion.div>
+
         </div>
       )}
     </AnimatePresence>

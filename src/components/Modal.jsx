@@ -10,7 +10,7 @@ export default function Modal({ open, onClose, title, children, isActive, onFocu
       {open && (
         <div className="modal-container">
           <motion.div
-            className={modal-window}
+            className={`modal-window ${isActive ? "active" : ""}`}
             onPointerDown={onFocus}
             drag={!isTouch}
             dragMomentum={false}

@@ -17,6 +17,17 @@
   pointer-events: auto;
   overflow: hidden;
   cursor: grab;
+  z-index: 10;
+  transition: box-shadow 0.25 ease;
+}
+
+.modal-window.active{
+  z-index: 20;
+  box-shadow: 0 22px 60px rgba(0,0,0,0.15);
+}
+
+[data-theme="dark"] .modal-window.active {
+  box-shadow: 0 22px 60px rgba(0,0,0,0.5);
 }
 
 [data-theme="dark"] .modal-window {

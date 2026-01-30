@@ -12,6 +12,24 @@ const items = [
 
 export default function DesktopGrid() {
   const [openWindows, setOpenWindows] = useState([]);
+  const [activeWindow, setActiveWindow] = useState(null);
+  const isTouch = typeof window !== "undefined"
+    && window.matchMedia("(pointer: coarse)").matches;
+
+
+  const openWindow = (id) => {
+    setOpenWindows(prev =>
+      prev.includes(id) ? prev : [...prev, id]
+    );
+    setActiveWindow(id);
+  };
+
+  const closeWindow = (id) => {
+    setOpenWindows(prev => prev.filter(w => w !== id));
+    if (activeWindow === id) {
+      setActiveWindow(null);
+    }
+  };
 
   return (
     <>
@@ -41,17 +59,13 @@ export default function DesktopGrid() {
                 <button
                   key={item.id}
                   className="icon-btn"
-                  onClick={() =>
-                    setOpenWindows(prev =>
-                      prev.includes(item.id) ? prev : [...prev, item.id]
-                    )
-                  }
+                  onClick={() => openWindow(item.id)}
                 >
                   <motion.div
                     className="icon-motion"
                     initial={false}
                     animate={{ scale: 1, y: 0 }}
-                    whileHover={{ scale: 1.08, y: -4 }}
+                    whileHover={!isTouch ? { scale: 1.08, y: -4 } : undefined}
                     whileTap={{ scale: 0.96, y: -2 }}
                     transition={{
                       type: "spring",
@@ -75,9 +89,9 @@ export default function DesktopGrid() {
           key={id}
           open
           title={id}
-          onClose={() =>
-            setOpenWindows(prev => prev.filter(w => w !== id))
-          }
+          isActive={activeWindow === id}
+          onFocus={() => setActiveWindow(id)}
+          onClose={() => closeWindow(id)}
         >
           <p>{id} content goes here.</p>
         </Modal>

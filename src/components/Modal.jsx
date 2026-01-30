@@ -1,14 +1,18 @@
 import { motion, AnimatePresence } from "framer-motion";
 import "./Modal.css";
 
-export default function Modal({ open, onClose, title, children }) {
+export default function Modal({ open, onClose, title, children, isActive, onFocus }) {
+  const isTouch = typeof window !== "undefined"
+    && window.matchMedia("(pointer: coarse)").matches;
+
   return (
     <AnimatePresence>
       {open && (
         <div className="modal-container">
           <motion.div
-            className="modal-window"
-            drag
+            className={`modal-window ${isActive ? "active" : ""}`}
+            onMouseDown={onFocus}
+            drag={!isTouch}
             dragMomentum={false}
             dragElastic={0.08}
             initial={{ opacity: 0, scale: 0.96, y: 24 }}
@@ -21,6 +25,7 @@ export default function Modal({ open, onClose, title, children }) {
               mass: 0.6
             }}
           >
+
             <div className="window-bar modal-bar">
               <span>{title}</span>
               <button onClick={onClose}>✕</button>

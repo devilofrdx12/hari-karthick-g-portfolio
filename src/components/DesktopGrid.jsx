@@ -13,8 +13,14 @@ const items = [
 export default function DesktopGrid() {
   const [openWindows, setOpenWindows] = useState([]);
   const [activeWindow, setActiveWindow] = useState(null);
+  const vibrate = (duration = 12) => {
+  if (navigator.vibrate) {
+    navigator.vibrate(duration);
+  }
+};
 
   const openWindow = (id) => {
+    vibrate(10);
     setOpenWindows(prev =>
       prev.includes(id) ? prev : [...prev, id]
     );
@@ -22,6 +28,7 @@ export default function DesktopGrid() {
   };
 
   const closeWindow = (id) => {
+    vibrate(15);
     setOpenWindows(prev => prev.filter(w => w !== id));
     if (activeWindow === id) {
       setActiveWindow(null);

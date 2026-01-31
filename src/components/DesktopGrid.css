@@ -146,7 +146,7 @@
 
 
 [data-theme="dark"] .icon-btn span {
-  color: #e6edf3; /* soft white, not pure white */
+  color: #e6edf3; /* soft white, not pure white ~hehe */
 }
 
 .icon-btn:hover span {
@@ -198,5 +198,22 @@
 
   .icon-btn span {
     font-size: 0.85rem;
+  }
+}
+
+/* ========== TOUCH IMPROVEMENTS (MOBILE ONLY) ========== */
+@media (pointer: coarse) {
+
+  .icon-btn {
+    padding: 0.6rem; /* increases tap area without visual change */
+  }
+
+  .icon-outline {
+    width: 60px;
+    height: 60px;
+  }
+
+  .icon-btn span {
+    font-size: 0.9rem;
   }
 }

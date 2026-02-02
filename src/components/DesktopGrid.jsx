@@ -31,7 +31,7 @@ const items = [
 ];
 
 
-export default function DesktopGrid() {
+export default function DesktopGrid({theme}) {
   const [openWindows, setOpenWindows] = useState([]);
   const [activeWindow, setActiveWindow] = useState(null);
   const vibrate = (pattern = [30, 20, 30]) => {
@@ -102,9 +102,7 @@ export default function DesktopGrid() {
                     <div className="icon-image-wrapper">
                       <img
                         src={
-                          document.documentElement.dataset.theme === "light"
-                            ? item.iconDark
-                            : item.icon
+                          theme === "dark"? item.iconDark : item.icon
                         }
                         alt={item.label}
                         className="icon-image"

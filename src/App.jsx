@@ -67,7 +67,7 @@ export default function App() {
         </button>
       </div>
 
-      <DesktopGrid />
+      <DesktopGrid theme={theme} />
     </>
   );
 }

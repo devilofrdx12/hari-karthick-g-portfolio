@@ -16,15 +16,15 @@ export default function DesktopGrid() {
   const vibrate = () => {
   if (!(navigator.vibrate)) return;{
     navigator.vibrate([
-        40, 30,
-        40, 30,
-        60
+        30, 20,
+        30, 20,
+        40
       ]);
   }
 };
 
   const openWindow = (id) => {
-    navigator.vibrate([60, 40, 60]);
+    navigator.vibrate([20, 15, 20]);
     setOpenWindows(prev =>
       prev.includes(id) ? prev : [...prev, id]
     );
@@ -32,7 +32,7 @@ export default function DesktopGrid() {
   };
 
   const closeWindow = (id) => {
-    vibrate([30, 25, 30]);
+    vibrate([20, 15, 20]);
     setOpenWindows(prev => prev.filter(w => w !== id));
     if (activeWindow === id) {
       setActiveWindow(null);

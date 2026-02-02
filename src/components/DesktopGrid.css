@@ -114,15 +114,19 @@
 
 }
 
-.icon-outline {
-  width: 58px;
-  height: 58px;
-  border: 2px solid #555;
-  border-radius: 12px;
-  margin-bottom: 0.4rem;
+/* Icon background box (Sheryap style) */
+.icon-image-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 14px;
+  background: #ffe8f1; /* soft pink */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   transition:
-    border-color 0.4s ease,
-    background-color 0.4s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
 }
 
 .icon-btn span {
@@ -144,6 +148,18 @@
   will-change: transform;
 }
 
+.icon-image {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Dark mode adjustments */
+
+[data-theme="dark"] .icon-image-wrapper {
+  background: rgba(255, 200, 220, 0.18);
+}
 
 [data-theme="dark"] .icon-btn span {
   color: #e6edf3; /* soft white, not pure white ~hehe */
@@ -155,6 +171,10 @@
 
 .main-window:hover {
   box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+}
+
+.icon-btn:hover .icon-image-wrapper {
+  transform: translateY(-2px);
 }
 
 /* ========== MOBILE RESPONSIVE ========== */

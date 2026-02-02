@@ -4,24 +4,41 @@ import Modal from "./Modal";
 import "./DesktopGrid.css";
 
 const items = [
-  { id: "about", label: "about" },
-  { id: "links", label: "links" },
-  { id: "work", label: "work" },
-  { id: "gallery", label: "gallery" },
+  {
+    id: "about",
+    label: "about",
+    icon: "/images/icon_about.webp",
+    iconDark: "/images/icon_about_dark.webp",
+  },
+  {
+    id: "links",
+    label: "links",
+    icon: "/images/icon_links.webp",
+    iconDark: "/images/icon_links_dark.webp",
+  },
+  {
+    id: "work",
+    label: "work",
+    icon: "/images/icon_work.webp",
+    iconDark: "/images/icon_work_dark.webp",
+  },
+  {
+    id: "gallery",
+    label: "gallery",
+    icon: "/images/icon_work.webp",
+    iconDark: "/images/icon_work_dark.webp",
+  },
 ];
+
 
 export default function DesktopGrid() {
   const [openWindows, setOpenWindows] = useState([]);
   const [activeWindow, setActiveWindow] = useState(null);
-  const vibrate = () => {
-  if (!(navigator.vibrate)) return;{
-    navigator.vibrate([
-        30, 20,
-        30, 20,
-        40
-      ]);
-  }
-};
+  const vibrate = (pattern = [30, 20, 30]) => {
+    if (!("vibrate" in navigator)) return;
+    navigator.vibrate(pattern);
+  };
+
 
   const openWindow = (id) => {
     navigator.vibrate([20, 15, 20]);
@@ -32,7 +49,7 @@ export default function DesktopGrid() {
   };
 
   const closeWindow = (id) => {
-    vibrate([20, 15, 20]);
+    vibrate([15, 10, 15]);
     setOpenWindows(prev => prev.filter(w => w !== id));
     if (activeWindow === id) {
       setActiveWindow(null);
@@ -82,7 +99,17 @@ export default function DesktopGrid() {
                       mass: 0.65
                     }}
                   >
-                    <div className="icon-outline" />
+                    <div className="icon-image-wrapper">
+                      <img
+                        src={
+                          document.documentElement.dataset.theme === "light"
+                            ? item.iconDark
+                            : item.icon
+                        }
+                        alt={item.label}
+                        className="icon-image"
+                      />
+                    </div>
                     <span>{item.label}</span>
                   </motion.div>
                 </button>

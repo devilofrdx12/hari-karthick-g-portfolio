@@ -49,12 +49,17 @@ body {
 }
 
 .footer {
-  position: fixed;
-  bottom: 1rem;
+  position: absolute;
+  bottom: 0.1rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 0.8rem;
+  color:#485056;
+}
+
+[data-theme="dark"] .footer{
+  color: #e6edf3;
 }
 
 /* Image-based theme icons (sun / moon) */

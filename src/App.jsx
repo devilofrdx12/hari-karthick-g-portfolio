@@ -66,8 +66,11 @@ export default function App() {
           )}
         </button>
       </div>
-
       <DesktopGrid theme={theme} />
+      
+      <footer className="footer">
+        <p>© 2025 Hari Karthick. All rights reserved.</p>
+      </footer>
     </>
   );
 }

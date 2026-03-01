@@ -28,10 +28,55 @@ const items = [
     icon: "/images/icon_work.webp",
     iconDark: "/images/icon_work_dark.webp",
   },
+  {
+    id: "personal info",
+    label: "personal info",
+    icon: "/images/icon_faq.webp",
+    iconDark: "/images/icon_faq_dark.webp",
+  }
 ];
 
+function WorkContent() {
+  return (
+    <div className="skills-wrapper">
 
-export default function DesktopGrid({theme}) {
+      <h2 className="skills-title">DEVELOPMENT</h2>
+      <div className="skills-grid">
+        {[
+          "C",
+          "C++",
+          "Java",
+          "Python",
+          "React",
+          "Vite",
+          "HTML/CSS",
+          "JavaScript"
+        ].map(skill => (
+          <div key={skill} className="skill-pill">
+            {skill}
+          </div>
+        ))}
+      </div>
+
+      <h2 className="skills-title">TOOLS</h2>
+      <div className="skills-grid">
+        {[
+          "Adobe Premiere Pro",
+          "Blender",
+          "Adobe Photoshop",
+          "Canva"
+        ].map(tool => (
+          <div key={tool} className="skill-pill">
+            {tool}
+          </div>
+        ))}
+      </div>
+
+    </div>
+  );
+}
+
+export default function DesktopGrid({ theme }) {
   const [openWindows, setOpenWindows] = useState([]);
   const [activeWindow, setActiveWindow] = useState(null);
   const vibrate = (pattern = [30, 20, 30]) => {
@@ -54,6 +99,50 @@ export default function DesktopGrid({theme}) {
     if (activeWindow === id) {
       setActiveWindow(null);
     }
+  };
+
+  const content = {
+    about: (
+      <>
+        <h2>About Me</h2>
+        <p>
+          I'm Hari Karthick, an Electronics and communication engineering
+          student passionate about programming, design, art, modelling, and creative technology.
+        </p>
+
+        <p>
+          I enjoy building interactive web experiences, experimenting with UI,
+          and combining engineering with art.
+        </p>
+      </>
+    ),
+
+    links: (
+      <>
+        <h2>Links</h2>
+        <ul>
+          <li><a href="https://github.com/devilofrdx12" target="_blank">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/hari-karthick-g-0d12" target="_blank">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/_dark_Shades_12_?igsh=MTN0cnQ5bGFzdWcwMQ==" target="_blank">Instagram</a></li>
+        </ul>
+      </>
+    ),
+
+    work: <WorkContent />,
+
+    gallery: (
+      <>
+        <h2>Gallery</h2>
+        <p>Artwork, experiments, edits, and visuals coming soon.</p>
+      </>
+    ),
+
+    "personal info": (
+      <>
+        <h2>Personal Info</h2>
+        <p>Phone number: +91 9789734998</p>
+        </>
+    )
   };
 
   return (
@@ -102,7 +191,7 @@ export default function DesktopGrid({theme}) {
                     <div className="icon-image-wrapper">
                       <img
                         src={
-                          theme === "dark"? item.iconDark : item.icon
+                          theme === "dark" ? item.iconDark : item.icon
                         }
                         alt={item.label}
                         className="icon-image"
@@ -126,7 +215,7 @@ export default function DesktopGrid({theme}) {
           onFocus={() => setActiveWindow(id)}
           onClose={() => closeWindow(id)}
         >
-          <p>{id} content goes here.</p>
+          {content[id]}
         </Modal>
       ))}
     </>

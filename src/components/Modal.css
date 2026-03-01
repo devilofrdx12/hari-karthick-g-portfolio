@@ -11,7 +11,7 @@
 .modal-window {
   width: min(90vw, 520px);
   background: var(--bg);
-  border-radius: 16px;
+  border-radius: 14px;
   border: 1px solid rgba(0,0,0,0.15);
   box-shadow: 0 16px 40px rgba(0,0,0,0.25);
   pointer-events: auto;
@@ -43,7 +43,7 @@
 .modal-bar button {
   background: none;
   border: 1px solid rgba(255,255,255,0.4);
-  color: #fff;
+  color: #ffffff;
   border-radius: 6px;
   width: 26px;
   height: 26px;
@@ -70,4 +70,53 @@
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden
+}
+
+.modal-content h2 {
+  margin-bottom: 0.8rem;
+}
+
+.modal-content a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.modal-content a:hover {
+  text-decoration: underline;
+}
+
+.skills-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skills-title {
+  font-size: 1.6rem;
+  letter-spacing: 0.10em;
+  font-weight: 550;
+  color: var(--accent);
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.skill-pill {
+  padding: 0.55rem 0.9rem;
+  border-radius: 8px;
+  background: rgba(255, 105, 180, 0.12);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: 
+    transform 0.2s ease,
+    background 0.2s ease;
+  cursor: default;
+}
+
+.skill-pill:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 105, 180, 0.25);
 }

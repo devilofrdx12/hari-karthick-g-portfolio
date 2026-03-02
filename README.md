@@ -17,5 +17,6 @@ music ....
 for light mode: purple cat 
 for dark mode: rose's secret to pearl - steven's universe
 
-This portfolio I done is inspired from @sherlineyap 
+This portfolio I done is inspired from @yapsherline
+
 

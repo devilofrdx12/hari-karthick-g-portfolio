@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import DesktopGrid from "./components/DesktopGrid";
-import Akira from "./components/frog";
+import Akira from "./components/Akira";
 import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon

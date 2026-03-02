@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import DesktopGrid from "./components/DesktopGrid";
+import Akira from "./components/frog";
 import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon
@@ -11,98 +12,125 @@ export default function App() {
   const [theme, setTheme] = useState("light");
   const [soundOn, setSoundOn] = useState(false);
 
-  const lightAudio = useRef(null);
-  const darkAudio = useRef(null);
+  const audioContextRef = useRef(null);
+  const lightGainRef = useRef(null);
+  const darkGainRef = useRef(null);
+  const lightSourceRef = useRef(null);
+  const darkSourceRef = useRef(null);
 
-  //applyingn theme
+  /// ---------------- fade audio engine version 2.0-----------------
+
+  useEffect(() => {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    const ctx = new AudioContextClass();
+    audioContextRef.current = ctx;
+
+    const lightAudio = new Audio("/audio/light.mp3");
+    const darkAudio = new Audio("/audio/dark.mp3");
+
+    lightAudio.loop = true;
+    darkAudio.loop = true;
+
+    const lightSource = ctx.createMediaElementSource(lightAudio);
+    const darkSource = ctx.createMediaElementSource(darkAudio);
+
+    const lightGain = ctx.createGain();
+    const darkGain = ctx.createGain();
+
+    lightGain.gain.value = 0;
+    darkGain.gain.value = 0;
+
+    lightSource.connect(lightGain).connect(ctx.destination);
+    darkSource.connect(darkGain).connect(ctx.destination);
+
+    lightSourceRef.current = lightAudio;
+    darkSourceRef.current = darkAudio;
+    lightGainRef.current = lightGain;
+    darkGainRef.current = darkGain;
+
+    return () => ctx.close();
+  }, []);
+
+  // crossfade function to smoothly transition between light and dark theme music
+
+  const crossfade = (toTheme) => {
+    const ctx = audioContextRef.current;
+    const now = ctx.currentTime;
+
+    const lightGain = lightGainRef.current;
+    const darkGain = darkGainRef.current;
+
+    const fadeDuration = 1.2; // seconds
+
+    if (toTheme === "light") {
+      lightGain.gain.cancelScheduledValues(now);
+      darkGain.gain.cancelScheduledValues(now);
+
+      lightGain.gain.setValueAtTime(lightGain.gain.value, now);
+      lightGain.gain.exponentialRampToValueAtTime(0.6, now + fadeDuration);
+
+      darkGain.gain.setValueAtTime(darkGain.gain.value, now);
+      darkGain.gain.exponentialRampToValueAtTime(0.0001, now + fadeDuration);
+    } else {
+      lightGain.gain.cancelScheduledValues(now);
+      darkGain.gain.cancelScheduledValues(now);
+
+      darkGain.gain.setValueAtTime(darkGain.gain.value, now);
+      darkGain.gain.exponentialRampToValueAtTime(0.6, now + fadeDuration);
+
+      lightGain.gain.setValueAtTime(lightGain.gain.value, now);
+      lightGain.gain.exponentialRampToValueAtTime(0.0001, now + fadeDuration);
+    }
+  };
+
+  // theme change effect
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
 
-  // the ultimate fade engine - version 1.0 - by Hari Karthick
-
-  const fade = (audio, from, to, duration = 800) => {
-    if (!audio) return;
-
-    const steps = 30;
-    const stepTime = duration / steps;
-    let current = 0;
-
-    const interval = setInterval(() => {
-      current++;
-      const progress = current / steps;
-      audio.volume = from + (to - from) * progress;
-
-      if (current >= steps) {
-        clearInterval(interval);
-        if (to === 0) audio.pause();
-      }
-    }, stepTime);
-  };
-
-  // handle music switching (^~^)
-
-  useEffect(() => {
     if (!soundOn) return;
-
-    const light = lightAudio.current;
-    const dark = darkAudio.current;
-    if (!light || !dark) return;
-
-    if (theme === "light") {
-      dark.volume = 1;
-      fade(dark, 1, 0, 900);
-
-      light.currentTime = 0;
-      light.play();
-      light.volume = 0;
-      fade(light, 0, 0.25, 900);
-    } else {
-      light.volume = 1;
-      fade(light, 1, 0, 900);
-
-      dark.currentTime = 0;
-      dark.play();
-      dark.volume = 0;
-      fade(dark, 0, 0.25, 900);
-    }
+    crossfade(theme);
   }, [theme]);
 
-  //sound toggle
+  // sound on/off effect
 
   useEffect(() => {
-    const light = lightAudio.current;
-    const dark = darkAudio.current;
-    if (!light || !dark) return;
+    const ctx = audioContextRef.current;
+    if (!ctx) return;
 
     if (soundOn) {
-      const activeAudio = theme === "light" ? light : dark;
-      activeAudio.volume = 0;
-      activeAudio.loop = true;
-      activeAudio.play();
-      fade(activeAudio, 0, 0.25, 800);
+      ctx.resume();
+
+      lightSourceRef.current.play();
+      darkSourceRef.current.play();
+
+      crossfade(theme);
     } else {
-      fade(light, light.volume, 0, 500);
-      fade(dark, dark.volume, 0, 500);
+      const now = ctx.currentTime;
+      const fadeDuration = 0.8;
+
+      lightGainRef.current.gain.exponentialRampToValueAtTime(
+        0.0001,
+        now + fadeDuration
+      );
+      darkGainRef.current.gain.exponentialRampToValueAtTime(
+        0.0001,
+        now + fadeDuration
+      );
     }
   }, [soundOn]);
 
-  // toggle logic
+  const toggleSound = ()=> {
+    setSoundOn(prev => !prev);
+  }
   return (
     <>
-      {/* Two hidden audio elements */}
-      <audio ref={lightAudio} src="/audio/light.mp3" loop />
-      <audio ref={darkAudio} src="/audio/dark.mp3" loop />
-
       <div className="top-controls">
-        {/* THEME TOGGLE */}
         <button
           className="control-btn"
           onClick={() =>
             setTheme(prev => (prev === "light" ? "dark" : "light"))
           }
-          aria-label="Toggle theme"
         >
           <img
             src={
@@ -110,16 +138,14 @@ export default function App() {
                 ? "/images/dark_mode_light.webp"
                 : "/images/dark_mode_dark.webp"
             }
-            alt={theme === "light" ? "Light mode" : "Dark mode"}
+            alt="toggle theme"
             className="ui-img-icon"
           />
         </button>
 
-        {/* SOUND TOGGLE */}
         <button
           className="control-btn"
-          onClick={() => setSoundOn(prev => !prev)}
-          aria-label="Toggle sound"
+          onClick={toggleSound}
         >
           {soundOn ? (
             <SpeakerWaveIcon className="ui-icon" />
@@ -129,6 +155,11 @@ export default function App() {
         </button>
       </div>
 
+      <Akira 
+        soundOn={soundOn}
+        toggleSound={toggleSound}
+      />
+      
       <DesktopGrid theme={theme} />
 
       <footer className="footer">

@@ -1,3 +1,14 @@
+*{
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  image-rendering: auto;;
+}
 /* ========== LAYOUT ========== */
 
 .desktop-wrapper {
@@ -6,6 +17,8 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+
+  padding: clamp(1rem, 3vw, 2rem);
 }
 
 .desktop-wrapper span {
@@ -60,7 +73,7 @@
 }
 
 .window-content h1 {
-  font-size: 3.2rem;
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 500;
   line-height: 1.9;
   margin-bottom: 0.5rem;
@@ -78,12 +91,11 @@
 }
 
 .window-content p {
-  font-size:1rem;
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
   color: #666;
   margin-bottom: 2.5rem;
 }
 
-.window-content h1,
 .window-content p {
   transition: color 0.25s ease;
 }
@@ -93,7 +105,7 @@
 .icon-grid {
   margin-top: 4rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   justify-content: center;
   gap: 1rem;
   align-items: start;
@@ -133,15 +145,9 @@
   will-change: transform;
 }
 
-/* Updated to your image wrapper system */
-.icon-image-wrapper {
-  width: 56px;
-  height: 56px;
-}
-
 .icon-image {
-  width: 60px;
-  height: 58px;
+  width: clamp(42px, 4vw, 60px);
+  height: auto;
   object-fit: contain;
   display: block;
 }
@@ -187,29 +193,135 @@
     transform 0.3s ease;
 }
 
+/*====== About content ======*/
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--bg);
+}
+
+.about-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.about-avatar:hover {
+  transform: scale(1.06);
+ 
+}
+
+.about-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.about-name {
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--accent);
+  margin: 0;
+}
+
+.about-sub {
+  color: var(--text);
+  opacity: 0.75;
+  margin: 0;
+}
+
+.about-body {
+  padding: 22px 28px;
+  overflow-y: auto;
+  max-height: 320px;
+  line-height: 1.7;
+}
+
+.about-body h3 {
+  margin-top: 26px;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.about-body ul {
+  padding-left: 20px;
+}
+
+.about-body li {
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+blockquote {
+  border-left: 4px solid rgba(120, 120, 120, 0.3);
+  padding-left: 8px;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+blockquote span {
+  color: var(--accent);
+}
+
+.modal-about {
+  width: 720px;
+  max-width: 90vw;
+}
+
+[data-theme="dark"] .about-body {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+
 /* ===== CINEMATIC MASONRY ===== */
 
 .masonry-grid {
   column-count: 3;
+  column-width: 30px;
   column-gap: 18px;
+}
+
+.masonry-grid img{
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .masonry-item {
   break-inside: avoid;
   margin-bottom: 18px;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
   cursor: pointer;
-  transition: box-shadow 0.3s ease;
+
+  will-change: transform;
+  transform: translateZ(0);
+
+  transition:  transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .masonry-item img {
   width: 100%;
+  height: auto;
   display: block;
   border-radius: 16px;
+
 }
 
 .masonry-item:hover {
+  transform : scale(1.03);
   box-shadow: 0 18px 40px rgba(0,0,0,0.2);
 }
 
@@ -218,7 +330,8 @@
 .lightbox-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.92);
+  background: var(--bg);
+  background: rgba(0,0,0,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -231,6 +344,9 @@
   border-radius: 20px;
   box-shadow: 0 30px 80px rgba(0,0,0,0.6);
   cursor: grab;
+
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .lightbox-nav {
@@ -317,4 +433,37 @@
 
 @media (max-width: 1024px) {
   .masonry-grid { column-count: 2; }
+}
+
+/* ===== THEME SCROLLBAR ===== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7c7c7;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Dark Mode Scrollbar */
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #777;
 }

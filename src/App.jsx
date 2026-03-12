@@ -159,12 +159,13 @@ export default function App() {
         soundOn={soundOn}
         toggleSound={toggleSound}
       />
-      
+      <div className = "page-container">
       <DesktopGrid theme={theme} />
 
       <footer className="footer">
         <p>© 2026 Hari Karthick. Normal portfolio.</p>
       </footer>
+      </div>
     </>
   );
 }

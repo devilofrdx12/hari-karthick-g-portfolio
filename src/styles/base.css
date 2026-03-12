@@ -99,6 +99,22 @@ body {
   filter: drop-shadow(0 8px 15px rgba(0,0,0,0.2));
 }
 
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer {
+  margin-top: auto;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
 /* Mobile scaling */
 @media (max-width: 768px) {
   .Akira-character {

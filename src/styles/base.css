@@ -5,7 +5,6 @@ body {
     to bottom,
     var(--bg-sky) 0%,
     var(--bg-sky) 65%,
-    var(--bg-ground) 65%,
     var(--bg-ground) 100%
   );
   transition: background 0.35s ease;

@@ -7,6 +7,8 @@ import {
 } from "@heroicons/react/24/outline";
 import "./styles/base.css";
 import "./styles/theme.css";
+import "./components/AnimatedWave.jsx";
+import AnimatedWave from "./components/AnimatedWave.jsx";
 
 export default function App() {
   const [theme, setTheme] = useState("light");
@@ -120,7 +122,7 @@ export default function App() {
     }
   }, [soundOn]);
 
-  const toggleSound = ()=> {
+  const toggleSound = () => {
     setSoundOn(prev => !prev);
   }
   return (
@@ -155,16 +157,16 @@ export default function App() {
         </button>
       </div>
 
-      <Akira 
+      <Akira
         soundOn={soundOn}
         toggleSound={toggleSound}
       />
-      <div className = "page-container">
-      <DesktopGrid theme={theme} />
-
-      <footer className="footer">
-        <p>© 2026 Hari Karthick. Normal portfolio.</p>
-      </footer>
+      <div className="page-container">
+        <DesktopGrid theme={theme} />
+        <AnimatedWave theme={theme} />
+        <footer className="footer">
+          <p>© 2026 Hari Karthick. Normal portfolio.</p>
+        </footer>
       </div>
     </>
   );

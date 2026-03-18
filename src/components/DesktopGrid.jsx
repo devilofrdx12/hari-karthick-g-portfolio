@@ -226,7 +226,7 @@ export default function DesktopGrid({ theme }) {
           <h3>EDUCATION</h3>
 
           <blockquote>
-            <span>Bachelor of Engineering – Electronics & Communication</span>
+            Bachelor of Engineering - <span>Electronics & Communication</span>
           </blockquote>
 
           <h3>OTHER INTERESTS</h3>

@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -7,8 +7,10 @@ html {
 }
 
 img {
-  image-rendering: auto;;
+  image-rendering: auto;
+  ;
 }
+
 /* ========== LAYOUT ========== */
 
 .desktop-wrapper {
@@ -32,8 +34,8 @@ img {
   max-width: calc(100vw - 2rem);
   background: var(--bg);
   border-radius: 16px;
-  border: 1px solid rgba(0,0,0,0.15);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
   overflow: hidden;
 
   transition:
@@ -44,7 +46,7 @@ img {
 }
 
 [data-theme="dark"] .main-window {
-  border-color: rgba(255,255,255,0.15);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 /* ========== WINDOW BAR ========== */
@@ -57,8 +59,8 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: 
-    background 0.3s ease, 
+  transition:
+    background 0.3s ease,
     color 0.3s ease;
 }
 
@@ -112,6 +114,9 @@ img {
 }
 
 /* ========== ICON BUTTON ========== */
+
+/* icon button effects */
+
 .icon-btn {
   background: none;
   border: none;
@@ -163,7 +168,8 @@ img {
 }
 
 [data-theme="dark"] .icon-btn span {
-  color: #e6edf3; /* soft white, not pure white ~hehe */
+  color: #e6edf3;
+  /* soft white, not pure white ~hehe */
 }
 
 .icon-btn:hover span {
@@ -171,7 +177,7 @@ img {
 }
 
 .main-window:hover {
-  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
 }
 
 .icon-btn:hover .icon-image-wrapper {
@@ -183,7 +189,8 @@ img {
   width: 70px;
   height: 70px;
   border-radius: 13px;
-  background: #fff4f8; /* soft pink */
+  background: #fff4f8;
+  /* soft pink */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,7 +212,7 @@ img {
   align-items: center;
   gap: 24px;
   padding: 24px 28px;
-  border-bottom: 1px solid var(--bg);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .about-avatar {
@@ -221,7 +228,6 @@ img {
 
 .about-avatar:hover {
   transform: scale(1.06);
- 
 }
 
 .about-intro {
@@ -233,7 +239,7 @@ img {
 .about-name {
   font-size: 36px;
   font-weight: 500;
-  color: var(--accent);
+  color: var(--text);
   margin: 0;
 }
 
@@ -248,9 +254,12 @@ img {
   overflow-y: auto;
   max-height: 320px;
   line-height: 1.7;
+  color: var(--text);
+  opacity: 5;
 }
 
 .about-body h3 {
+  color: var(--text);
   margin-top: 26px;
   font-size: 20px;
   letter-spacing: 1px;
@@ -273,6 +282,13 @@ blockquote {
 }
 
 blockquote span {
+  color: var(--text);
+  transform: 
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+blockquote span:hover {
   color: var(--accent);
 }
 
@@ -286,7 +302,7 @@ blockquote span {
 }
 
 
-/* ===== CINEMATIC MASONRY ===== */
+/* ===== CINEMATIC MASONRY - Gallery ===== */
 
 .masonry-grid {
   column-count: 3;
@@ -294,7 +310,7 @@ blockquote span {
   column-gap: 18px;
 }
 
-.masonry-grid img{
+.masonry-grid img {
   will-change: transform;
   transform: translateZ(0);
 }
@@ -309,7 +325,7 @@ blockquote span {
   will-change: transform;
   transform: translateZ(0);
 
-  transition:  transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .masonry-item img {
@@ -321,8 +337,8 @@ blockquote span {
 }
 
 .masonry-item:hover {
-  transform : scale(1.03);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.2);
+  transform: scale(1.03);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* LIGHTBOX */
@@ -331,7 +347,7 @@ blockquote span {
   position: fixed;
   inset: 0;
   background: var(--bg);
-  background: rgba(0,0,0,0.15);
+  background: rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -342,7 +358,7 @@ blockquote span {
   max-width: 85%;
   max-height: 85vh;
   border-radius: 20px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
   cursor: grab;
 
   will-change: transform;
@@ -405,7 +421,7 @@ blockquote span {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.6rem;
   }
-
+  
 }
 
 
@@ -413,7 +429,8 @@ blockquote span {
 @media (pointer: coarse) {
 
   .icon-btn {
-    padding: 0.75rem; /* improves tap comfort */
+    padding: 0.75rem;
+    /* improves tap comfort */
   }
 
   .icon-image-wrapper {
@@ -424,7 +441,7 @@ blockquote span {
   .icon-image {
     width: 44px;
     height: 46px;
-  } 
+  }
 
   .icon-btn span {
     font-size: 0.9rem;
@@ -432,7 +449,51 @@ blockquote span {
 }
 
 @media (max-width: 1024px) {
-  .masonry-grid { column-count: 2; }
+  .masonry-grid {
+    column-count: 2;
+  }
+}
+
+/* ===== MOBILE LAYOUT FIXES ONLY ===== */
+@media (max-width: 768px) {
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* push content area to fill screen */
+  .desktop-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ===== FOOTER FIX ===== */
+
+  .footer {
+    width: 100%;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 0.95rem;
+    color: var(--text);
+    opacity: 0.7;
+
+    padding: 18px 0;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+  }
 }
 
 /* ===== THEME SCROLLBAR ===== */

@@ -421,9 +421,7 @@ blockquote span:hover {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.6rem;
   }
-  
 }
-
 
 /* ========== TOUCH IMPROVEMENTS ========== */
 @media (pointer: coarse) {

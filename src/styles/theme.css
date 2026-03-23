@@ -5,17 +5,25 @@
   --bg: #ffffff;
   --text: #222222;
   --accent: #f7941d;
-
   --font-body: "Zen Kaku Gothic New", sans-serif;
+
+  --title-bg: #444;
+  --title-text: #ffffff;
+  --window-border: #444444;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 [data-theme="dark"] {
+
   --bg-sky: #0c0c0c;
   --bg-ground: #0f3554;
 
   --bg: #0e1b2e;
   --text: #ffffff;
   --accent: #9fe7ff;
-
   --font-body: "Zen Kaku Gothic New", sans-serif;
+
+  --title-bg: #2f2f2f;
+  --title-text: #ffffff;
+  --window-border: #ffffff; /* Stark solid black outline for dark mode */
 }

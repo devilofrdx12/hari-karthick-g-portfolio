@@ -8,7 +8,6 @@ html {
 
 img {
   image-rendering: auto;
-  ;
 }
 
 /* ========== LAYOUT ========== */
@@ -19,7 +18,6 @@ img {
   justify-content: center;
   align-items: center;
   text-align: center;
-
   padding: clamp(1rem, 3vw, 2rem);
 }
 
@@ -33,39 +31,27 @@ img {
   width: 680px;
   max-width: calc(100vw - 2rem);
   background: var(--bg);
-  border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  /* Unified outer outline that perfectly hugs the curves: */
+  border-radius: 12px;
+  border: 2px solid var(--window-border); 
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
-  overflow: hidden;
-
-  transition:
-    background 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease,
-    transform 0.35s ease;
+  overflow: hidden; /* This traps the header so it doesn't spill over the curves */
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
 }
-
-[data-theme="dark"] .main-window {
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-/* ========== WINDOW BAR ========== */
 
 .window-bar {
-  background: #444;
-  color: #fff;
-  padding: 0.9rem 1rem;
-  font-size: 1rem;
+  background: var(--title-bg);
+  color: var(--title-text);
+  padding: 0.75rem 1.5rem;
+  font-size: 1.15rem;
+  font-family: var(--font-mono);
+  font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition:
-    background 0.3s ease,
-    color 0.3s ease;
-}
+  transition: background 0.3s ease, color 0.3s ease;
 
-[data-theme="dark"] .window-bar {
-  background: #2f2f2f;
+  border-bottom: 2px solid var(--window-border);
 }
 
 /* ========== CONTENT ========== */
@@ -96,9 +82,6 @@ img {
   font-size: clamp(0.9rem, 1.1vw, 1rem);
   color: #666;
   margin-bottom: 2.5rem;
-}
-
-.window-content p {
   transition: color 0.25s ease;
 }
 
@@ -128,18 +111,21 @@ img {
   gap: 0.6rem;
   color: var(--text);
   transition: color 0.25s ease;
-
 }
 
 .icon-btn span {
   margin-top: 0.4rem;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: bold;
+  font-family: var(--font-mono);
   line-height: 1;
   text-transform: lowercase;
-  color: #444;
   color: var(--text);
   transition: color 0.25s ease;
+}
+
+[data-theme="dark"] .icon-btn span {
+  color: #e6edf3;
 }
 
 .icon-motion {
@@ -157,11 +143,17 @@ img {
   display: block;
 }
 
-.icon-btn span {
-  font-size: 0.85rem;
+/* soft pink/dark pink icon background boxes! */
+.icon-image-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 13px;
+  background: #fff4f8; /*soft pink*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
-
-/* Dark mode adjustments */
 
 [data-theme="dark"] .icon-image-wrapper {
   background: rgba(255, 200, 220, 0.18);
@@ -182,22 +174,6 @@ img {
 
 .icon-btn:hover .icon-image-wrapper {
   transform: translateY(-2px);
-}
-
-/* Icon background box (Sheryap style) */
-.icon-image-wrapper {
-  width: 70px;
-  height: 70px;
-  border-radius: 13px;
-  background: #fff4f8;
-  /* soft pink */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition:
-    background 0.3s ease,
-    transform 0.3s ease;
 }
 
 /*====== About content ======*/
@@ -333,7 +309,6 @@ blockquote span:hover {
   height: auto;
   display: block;
   border-radius: 16px;
-
 }
 
 .masonry-item:hover {
@@ -346,7 +321,6 @@ blockquote span:hover {
 .lightbox-overlay {
   position: fixed;
   inset: 0;
-  background: var(--bg);
   background: rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
@@ -360,7 +334,6 @@ blockquote span:hover {
   border-radius: 20px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
   cursor: grab;
-
   will-change: transform;
   transform: translateZ(0);
 }
@@ -421,14 +394,122 @@ blockquote span:hover {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.6rem;
   }
+
+/*about part*/
+
+.about-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px 20px 20px; /* Exact top spacing */
+    gap: 12px;
+    border-bottom: none; /* Removes the desktop border to prevent double-lines */
+  }
+
+  .about-avatar {
+    width: 100px; /* Perfectly scaled down for mobile */
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  .about-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .about-name {
+    font-size: 1.5rem; /* Prevents awkward wrapping on small phones */
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .about-sub {
+    font-size: 0.9rem; /* Smaller subtitle size */
+    line-height: 1.4;
+    margin: 0;
+    opacity: 0.8;
+    padding: 0 10px;
+  }
+
+  .about-divider {
+    margin: 0 20px; /* Gives the horizontal line exact breathing room */
+    width: calc(100% - 40px);
+  }
+
+  .about-body {
+    padding: 20px 20px 40px; /* Reduced side padding so text isn't squished */
+    font-size: 0.95rem; /* Standard readable mobile text */
+    line-height: 1.6;
+    text-align: left;
+    
+    /* Forces the whole page to scroll smoothly */
+    overflow-y: visible;
+    max-height: none;
+  }
+
+  .about-body h3 {
+    font-size: 1.1rem; /* Proportional header size */
+    margin-top: 24px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .about-body blockquote {
+    font-size: 0.9rem;
+    padding-left: 12px;
+    margin: 8px 0;
+  }
+
+  .about-body ul {
+    padding-left: 20px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  .about-body li {
+    margin-bottom: 4px;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .desktop-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95rem;
+    color: var(--text);
+    opacity: 0.7;
+    padding: 18px 0;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+  }
 }
 
-/* ========== TOUCH IMPROVEMENTS ========== */
 @media (pointer: coarse) {
-
   .icon-btn {
     padding: 0.75rem;
-    /* improves tap comfort */
   }
 
   .icon-image-wrapper {
@@ -452,49 +533,7 @@ blockquote span:hover {
   }
 }
 
-/* ===== MOBILE LAYOUT FIXES ONLY ===== */
-@media (max-width: 768px) {
-
-  html,
-  body,
-  #root {
-    height: 100%;
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  /* push content area to fill screen */
-  .desktop-wrapper {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* ===== FOOTER FIX ===== */
-
-  .footer {
-    width: 100%;
-    text-align: center;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 0.95rem;
-    color: var(--text);
-    opacity: 0.7;
-
-    padding: 18px 0;
-    padding-bottom: max(18px, env(safe-area-inset-bottom));
-  }
-}
-
-/* ===== THEME SCROLLBAR ===== */
+/*LIGHT SCROLLBAR*/
 
 ::-webkit-scrollbar {
   width: 6px;

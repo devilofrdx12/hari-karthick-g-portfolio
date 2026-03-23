@@ -8,6 +8,7 @@ body {
     var(--bg-ground) 100%
   );
   transition: background 0.35s ease;
+  overflow: hidden;
 }
 
 .top-controls {
@@ -61,7 +62,6 @@ body {
   color: #e6edf3;
 }
 
-/* Image-based theme icons (sun / moon) */
 .ui-img-icon {
   width: 22px;
   height: 22px;
@@ -71,13 +71,11 @@ body {
     opacity 0.2s ease;
 }
 
-/* Hover animation for image icons */
 .control-btn:hover .ui-img-icon {
   transform: scale(1.15) rotate(-8deg);
   opacity: 0.9;
 }
 
-/* Active (click) state */
 .control-btn:active .ui-img-icon {
   transform: scale(0.95);
 }
@@ -91,7 +89,6 @@ body {
   z-index: 40;
   scale: 1.7;
   width: clamp(65px, 8vw, 95px);
-
   will-change: transform;
   transform: translateY(1.5px);
   transition: transform 0.25s ease;
@@ -109,12 +106,6 @@ body {
   margin-top: auto;
 }
 
-body {
-  margin: 0;
-  overflow-x: hidden;
-}
-
-/* Mobile scaling */
 @media (max-width: 768px) {
   .Akira-character {
     width: 95px;

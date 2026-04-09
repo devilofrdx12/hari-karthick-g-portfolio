@@ -217,10 +217,10 @@ export default function DesktopGrid({ theme }) {
           </p>
 
           <ul>
-            <li>create interactive web applications</li>
-            <li>experiment with UI and animation</li>
-            <li>build engineering + software projects</li>
-            <li>explore art, design and motion graphics</li>
+            <li>Create interactive web applications</li>
+            <li>Experiment with UI and animation</li>
+            <li>Build engineering + software projects</li>
+            <li>Explore art, design and motion graphics</li>
           </ul>
 
           <h3>EDUCATION</h3>
@@ -234,16 +234,16 @@ export default function DesktopGrid({ theme }) {
           <h3>OTHER INTERESTS</h3>
 
           <ul>
-            <li>embedded systems</li>
+            <li>Embedded systems</li>
             <li>UI design and motion graphics</li>
-            <li>electronics prototyping</li>
-            <li>creative coding</li>
+            <li>Electronics prototyping</li>
+            <li>Creative coding</li>
           </ul>
 
           <h3>LANGUAGE PROFICIENCY</h3>
 
           <blockquote>
-            native fluency in <span className="accent">English</span> and
+            Native fluency in <span className="accent">English</span> and
             conversational <span className="accent">Tamil</span>.
           </blockquote>
 
@@ -258,7 +258,7 @@ export default function DesktopGrid({ theme }) {
           {[
             { id: "github", label: "github", link: "https://github.com/devilofrdx12", icon: "/images/icon_links.webp" },
             { id: "linkedin", label: "linkedin", link: "https://www.linkedin.com/in/hari-karthick-g-0d12", icon: "/images/icon_links.webp" },
-            { id: "instagram", label: "instagram", link: "https://www.instagram.com/_dark_Shades_12_/", icon: "/images/icon_ig_solid.webp", iconDark: "/images/icon_ig_solid_dark.webp" },
+            { id: "instagram", label: "instagram", link: "https://www.instagram.com/_dark_Shades_12_/", icon: "/images/icon_ig_solid_dark.webp", iconDark: "/images/icon_ig_solid.webp" },
           ].map((item) => (
             <a key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="link-card">
               <motion.div className="link-motion" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>

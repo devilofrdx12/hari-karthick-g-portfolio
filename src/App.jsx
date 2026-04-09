@@ -28,8 +28,8 @@ export default function App() {
     const ctx = new AudioContextClass();
     audioContextRef.current = ctx;
 
-    const lightAudio = new Audio("/audio/light.mp3");
-    const darkAudio = new Audio("/audio/dark.mp3");
+    const lightAudio = new Audio("/audio/Daytime.mp3");
+    const darkAudio = new Audio("/audio/Nighttime.mp3");
 
     lightAudio.loop = true;
     darkAudio.loop = true;
@@ -157,12 +157,11 @@ export default function App() {
           )}
         </button>
       </div>
-
-      <FlyingBat theme={theme} /> 
       <Akira
         soundOn={soundOn}
         toggleSound={toggleSound}
       />
+      <FlyingBat theme={theme} /> 
       <div className="page-container">
         <DesktopGrid theme={theme} />
         <AnimatedWave theme={theme} />

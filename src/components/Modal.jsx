@@ -1,19 +1,28 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useDragControls } from "framer-motion";
 import "./Modal.css";
 
 export default function Modal({ open, onClose, title, children, isActive, onFocus }) {
   const isTouch = typeof window !== "undefined"
     && window.matchMedia("(pointer: coarse)").matches;
 
+  const dragControls = useDragControls();
+
+  const handleDragStart = (e) => {
+    onFocus(); 
+    dragControls.start(e);
+  };
+
   return (
     <AnimatePresence>
       {open && (
         <div className="modal-container">
           <motion.div
-            className={`modal-window ${isActive ? "active" : ""} ${title === "about" ? "modal-about" :
-                title === "links" ? "modal-links" : ""}`}
-            onPointerDown={onFocus}
+            className={`modal-window ${isActive ? "active" : ""} ${title === "about" ? "modal-about" : ""}`}
+            onPointerDown={onFocus} 
+            onClick={(e) => e.stopPropagation()} 
             drag
+            dragControls={dragControls}
+            dragListener={false} 
             dragMomentum={false}
             dragElastic={isTouch ? 0 : 0.08}
             initial={{ opacity: 0, scale: 0.96, y: 24 }}
@@ -25,11 +34,18 @@ export default function Modal({ open, onClose, title, children, isActive, onFocu
                 : { type: "spring", stiffness: 420, damping: 34, mass: 0.65 }
             }
           >
-            <div className="window-bar modal-bar">
+            <div 
+              className="window-bar modal-bar"
+              onPointerDown={handleDragStart}
+            >
               <span>{title}</span>
               <button
-                onPointerDown={e => e.stopPropagation()}
-                onClick={onClose}
+                className="modal-close-btn"
+                onPointerDown={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onClose();
+                }}
               >
                 ✕
               </button>
@@ -37,7 +53,6 @@ export default function Modal({ open, onClose, title, children, isActive, onFocu
 
             <div className="modal-content">{children}</div>
           </motion.div>
-
         </div>
       )}
     </AnimatePresence>

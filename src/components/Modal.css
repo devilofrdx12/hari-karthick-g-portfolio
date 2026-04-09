@@ -23,6 +23,10 @@
   will-change: transform;
   transform: translateZ(0);
 }
+.modal-close-btn{
+  postition: relative;
+  z-index: 10;
+}
 
 .modal-window.active {
   z-index: 20;
@@ -44,8 +48,10 @@
   font-family: var(--font-mono);
   font-size: 1.15rem;
   font-weight: bold;
-
   border-bottom: 2px solid var(--window-border);
+  cursor: default;
+  -webkit-user-select: user-select;
+  user-select: none;touch-action:none;
 }
 
 .modal-bar button {

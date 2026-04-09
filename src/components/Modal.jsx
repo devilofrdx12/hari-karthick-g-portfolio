@@ -10,7 +10,8 @@ export default function Modal({ open, onClose, title, children, isActive, onFocu
       {open && (
         <div className="modal-container">
           <motion.div
-            className={`modal-window ${isActive ? "active" : ""} ${title === "about" ? "modal-about" : ""}`}
+            className={`modal-window ${isActive ? "active" : ""} ${title === "about" ? "modal-about" :
+                title === "links" ? "modal-links" : ""}`}
             onPointerDown={onFocus}
             drag
             dragMomentum={false}

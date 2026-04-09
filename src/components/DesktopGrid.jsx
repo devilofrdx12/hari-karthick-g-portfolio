@@ -197,7 +197,7 @@ export default function DesktopGrid({ theme }) {
 
           <div className="about-intro">
             <h1 className="about-name">
-              Hari Karthick G
+              <span className="accent">Hari Karthick G</span>
             </h1>
 
             <p className="about-sub">
@@ -205,7 +205,7 @@ export default function DesktopGrid({ theme }) {
             </p>
 
             <p className="about-sub">
-              Developer • Artist • Video Editor
+              Engineer • Artist • Video Editor
             </p>
           </div>
         </div>
@@ -227,6 +227,8 @@ export default function DesktopGrid({ theme }) {
 
           <blockquote>
             Bachelor of Engineering - <span>Electronics & Communication</span>
+            <br />
+            (Graduation expected in 2028)
           </blockquote>
 
           <h3>OTHER INTERESTS</h3>
@@ -250,16 +252,23 @@ export default function DesktopGrid({ theme }) {
       </div>
     ),
 
-
-    links: (
-      <>
-        <h2>Links</h2>
-        <ul>
-          <li><a href="https://github.com/devilofrdx12" target="_blank">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/hari-karthick-g-0d12" target="_blank">LinkedIn</a></li>
-          <li><a href="https://www.instagram.com/_dark_Shades_12_?igsh=MTN0cnQ5bGFzdWcwMQ==" target="_blank">Instagram</a></li>
-        </ul>
-      </>
+  links: (
+      <div className="links-container">
+        <div className="links-grid">
+          {[
+            { id: "github", label: "github", link: "https://github.com/devilofrdx12", icon: "/images/icon_links.webp" },
+            { id: "linkedin", label: "linkedin", link: "https://www.linkedin.com/in/hari-karthick-g-0d12", icon: "/images/icon_links.webp" },
+            { id: "instagram", label: "instagram", link: "https://www.instagram.com/_dark_Shades_12_/", icon: "/images/icon_ig_solid.webp", iconDark: "/images/icon_ig_solid_dark.webp" },
+          ].map((item) => (
+            <a key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="link-card">
+              <motion.div className="link-motion" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <img src={item.icon} alt={item.label} className="link-icon-img" />
+                <span className="link-text-label">{item.label}</span>
+              </motion.div>
+            </a>
+          ))}
+        </div>
+      </div>
     ),
 
     work: <WorkContent />,

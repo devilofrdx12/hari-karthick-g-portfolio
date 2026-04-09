@@ -10,9 +10,7 @@
 
 /* DESKTOP MODAL SHELL */
 .modal-window {
-  width: min(90vw, 520px);
   background: var(--bg);
-  /* Unified outer outline: */
   border-radius: 12px;
   border: 2px solid var(--window-border);
   box-shadow: 0 16px 40px rgba(0,0,0,0.25);
@@ -21,6 +19,9 @@
   cursor: default;
   z-index: 10;
   transition: box-shadow 0.25s ease, border-color 0.35s ease;
+  touch-action: none;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .modal-window.active {
@@ -72,11 +73,11 @@
 }
 
 .modal-window {
-width: min(90vw, 800px);
+  width: min(90vw, 800px);
   background: var(--bg);
   border-radius: 12px;
   border: 2px solid var(--window-border);
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   pointer-events: auto;
   overflow: hidden;
   cursor: default;
@@ -85,7 +86,8 @@ width: min(90vw, 800px);
 }
 
 [data-theme="dark"] .modal-window {
-  color: #e6edf3; /* soft white */
+  color: #e6edf3;
+  /* soft white */
 }
 
 .modal-window {
@@ -111,7 +113,34 @@ width: min(90vw, 800px);
 .modal-content {
   max-height: 70vh;
   overflow-y: auto;
-  padding: 2rem;
+  padding: 1rem;
+}
+
+.modal-links {
+  width: min(90vw, 600px);
+  height: auto; /* Changed to auto so it expands to fit the content */
+  min-height: 350px;
+}
+
+/* ========== PIXEL-PERFECT DESKTOP OFFSET ========== */
+@media (min-width: 769px) {
+  .modal-links {
+    /* Shifts the window down and right from the center, exactly like your image */
+    margin-left: 300px; 
+    margin-top: 30px;
+    
+    /* Give it a stronger shadow so it clearly "floats" above the Home window */
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Ensure mobile stays centered and snapped to bottom (No offset on mobile!) */
+@media (max-width: 768px) {
+  .modal-links {
+    width: 55vw;
+    height: 70vh;
+    align-items: center;
+  }
 }
 
 .skills-wrapper {
@@ -139,7 +168,7 @@ width: min(90vw, 800px);
   background: rgba(255, 105, 180, 0.12);
   font-size: 0.85rem;
   font-weight: 500;
-  transition: 
+  transition:
     transform 0.2s ease,
     background 0.2s ease;
   cursor: default;

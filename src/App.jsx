@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import DesktopGrid from "./components/DesktopGrid";
 import Akira from "./components/Akira";
+import FlyingBat from "./components/FlyingBat";
 import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon
@@ -157,6 +158,7 @@ export default function App() {
         </button>
       </div>
 
+      <FlyingBat theme={theme} /> 
       <Akira
         soundOn={soundOn}
         toggleSound={toggleSound}

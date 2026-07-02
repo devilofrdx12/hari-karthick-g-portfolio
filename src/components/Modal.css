@@ -8,8 +8,9 @@
   z-index: 60;
 }
 
-/* DESKTOP MODAL SHELL */
+/* ========== MODAL WINDOW (consolidated) ========== */
 .modal-window {
+  width: min(90vw, 800px);
   background: var(--bg);
   border-radius: 12px;
   border: 2px solid var(--window-border);
@@ -19,12 +20,20 @@
   cursor: default;
   z-index: 10;
   transition: box-shadow 0.25s ease, border-color 0.35s ease;
-  touch-action: none;
   will-change: transform;
   transform: translateZ(0);
+  backface-visibility: hidden;
 }
-.modal-close-btn{
-  postition: relative;
+
+/* ========== LARGE SCREENS (4K / 1920px+) ========== */
+@media (min-width: 1920px) {
+  .modal-window {
+    width: min(80vw, 1200px);
+  }
+}
+
+.modal-close-btn {
+  position: relative;
   z-index: 10;
 }
 
@@ -37,7 +46,11 @@
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.5);
 }
 
-/* DESKTOP MODAL BAR */
+[data-theme="dark"] .modal-window {
+  color: #e6edf3;
+}
+
+/* ========== MODAL BAR (drag handle) ========== */
 .modal-bar {
   display: flex;
   justify-content: space-between;
@@ -50,8 +63,18 @@
   font-weight: bold;
   border-bottom: 2px solid var(--window-border);
   cursor: default;
-  -webkit-user-select: user-select;
-  user-select: none;touch-action:none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* touch-action: none ONLY here so dragging via title bar works on mobile */
+  touch-action: none;
+}
+
+/* ========== LARGE SCREENS (4K / 1920px+) ========== */
+@media (min-width: 1920px) {
+  .modal-bar {
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+  }
 }
 
 .modal-bar button {
@@ -72,35 +95,16 @@
   transform: scale(0.8);
 }
 
+/* ========== MODAL CONTENT (scrollable area) ========== */
 .modal-content {
   color: inherit;
-  padding: 1.5rem;
+  padding: 1rem;
   cursor: default;
-}
-
-.modal-window {
-  width: min(90vw, 800px);
-  background: var(--bg);
-  border-radius: 12px;
-  border: 2px solid var(--window-border);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  pointer-events: auto;
-  overflow: hidden;
-  cursor: default;
-  z-index: 10;
-  transition: box-shadow 0.25s ease;
-}
-
-[data-theme="dark"] .modal-window {
-  color: #e6edf3;
-  /* soft white */
-}
-
-.modal-window {
-  touch-action: none;
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden
+  max-height: 70vh;
+  overflow-y: auto;
+  /* Allow native vertical scrolling on touch devices */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-content h2 {
@@ -116,40 +120,37 @@
   text-decoration: underline;
 }
 
-.modal-content {
-  max-height: 70vh;
-  overflow-y: auto;
-  padding: 1rem;
-}
-
+/* ========== LINKS MODAL ========== */
 .modal-links {
   width: min(90vw, 600px);
-  height: auto; /* Changed to auto so it expands to fit the content */
+  height: auto;
   min-height: 350px;
 }
 
 /* ========== PIXEL-PERFECT DESKTOP OFFSET ========== */
 @media (min-width: 769px) {
   .modal-links {
-    /* Shifts the window down and right from the center, exactly like your image */
-    margin-left: 300px; 
+    margin-left: 300px;
     margin-top: 30px;
-    
-    /* Give it a stronger shadow so it clearly "floats" above the Home window */
     box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
   }
 }
 
-/* Ensure mobile stays centered and snapped to bottom (No offset on mobile!) */
-@media (max-width: 769px) {
+/* Mobile: center the links modal, allow proper height */
+@media (max-width: 768px) {
   .modal-links {
-    margin: 0 auto; /* Center horizontally */
-    width: 90vw; /* Full width on mobile */
-    height: 10vh; /* Let it expand vertically */
-    align-items: center;
+    margin: 0 auto;
+    width: 90vw;
+    height: auto;
+    min-height: unset;
+  }
+
+  .modal-content {
+    max-height: 65vh;
   }
 }
 
+/* ========== SKILLS (inside work modal) ========== */
 .skills-wrapper {
   display: flex;
   flex-direction: column;

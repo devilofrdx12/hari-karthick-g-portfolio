@@ -99,6 +99,37 @@ img {
   align-items: start;
 }
 
+/* ========== LARGE SCREENS (4K / 1920px+) ========== */
+@media (min-width: 1920px) {
+  .main-window {
+    width: 950px;
+  }
+  
+  .window-bar {
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+  }
+  
+  .window-content {
+    padding: 3.5rem 4rem 4rem;
+  }
+  
+  .window-content h1 {
+    font-size: clamp(3rem, 4vw, 4.2rem);
+  }
+  
+  .window-content p {
+    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+    margin-bottom: 3.5rem;
+  }
+  
+  .icon-grid {
+    margin-top: 5rem;
+    gap: 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* ========== ICON BUTTON ========== */
 
 /* icon button effects */
@@ -337,7 +368,7 @@ blockquote span:hover {
 
 .modal-about {
   width: 720px;
-  max-width: 90vw;
+  max-width: min(90vw, calc(100vw - 2rem));
 }
 
 [data-theme="dark"] .about-body {
@@ -386,7 +417,7 @@ blockquote span:hover {
 /* LIGHTBOX */
 
 .lightbox-overlay {
-  position: fixed;
+  position: absolute; /* Cover the modal, not the whole screen */
   inset: 0;
   background: rgba(0, 0, 0, 0.15);
   display: flex;
@@ -397,7 +428,8 @@ blockquote span:hover {
 
 .lightbox-image {
   max-width: 85%;
-  max-height: 85vh;
+  max-height: 85%; /* Use % relative to modal, not vh relative to screen */
+  object-fit: contain; /* Ensure it scales down proportionally */
   border-radius: 20px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
   cursor: grab;
@@ -429,11 +461,34 @@ blockquote span:hover {
   right: 30px;
 }
 
-/* ========== MOBILE RESPONSIVE ========== */
-@media (max-width: 768px) {
+/* ========== TABLET RESPONSIVE (601px - 768px) ========== */
+@media (min-width: 601px) and (max-width: 768px) {
+
+  .desktop-wrapper {
+    padding: 1.5rem;
+    padding-top: 3.5rem;
+  }
+
+  .main-window {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+  }
+
+  .icon-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+  }
+}
+
+/* ========== PHONE RESPONSIVE (≤600px) ========== */
+@media (max-width: 600px) {
 
   .desktop-wrapper {
     padding: 1rem;
+    padding-top: 3.5rem; /* Clear the fixed top-left controls */
+    min-height: auto;
   }
 
   .main-window {
@@ -442,24 +497,36 @@ blockquote span:hover {
     border-radius: 12px;
   }
 
+  .window-bar {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
   .window-content {
-    padding: 2rem 1.4rem;
+    padding: 1.2rem;
   }
 
   .window-content h1 {
-    font-size: 2.1rem;
+    font-size: 2.2rem; /* Slightly smaller to prevent excessive wrapping */
     line-height: 1.25;
+    margin-bottom: 0.2rem;
   }
 
   .window-content p {
-    font-size: 0.95rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
   }
 
   /* ICON GRID 2x2 */
   .icon-grid {
+    margin-top: 1.5rem; /* Override the 4rem desktop margin */
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.6rem;
+    gap: 0.8rem;
+  }
+
+  .icon-image-wrapper {
+    width: 60px;
+    height: 60px;
   }
 
 /*about part*/
@@ -508,14 +575,15 @@ blockquote span:hover {
   }
 
   .about-body {
-    padding: 20px 20px 40px; /* Reduced side padding so text isn't squished */
-    font-size: 0.95rem; /* Standard readable mobile text */
+    padding: 20px 20px 40px;
+    font-size: 0.95rem;
     line-height: 1.6;
     text-align: left;
     
-    /* Forces the whole page to scroll smoothly */
-    overflow-y: visible;
-    max-height: none;
+    /* Allow scrolling inside the modal on mobile */
+    overflow-y: auto;
+    max-height: 45vh;
+    -webkit-overflow-scrolling: touch;
   }
 
   .about-body h3 {
@@ -575,10 +643,10 @@ blockquote span:hover {
 }
 
 
-/* Mobile adjustments for the 4-column grid */
+/* Mobile adjustments for the links grid */
 @media (max-width: 768px) {
   .links-grid {
-    grid-template-columns: repeat(3, 1fr); /* Back to 2 columns for mobile screens */
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
   
@@ -586,6 +654,18 @@ blockquote span:hover {
     padding: 0.8rem 1rem;
     width: 90%;
     text-align: center;
+  }
+}
+
+/* Very small phones — single-column links */
+@media (max-width: 380px) {
+  .links-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .links-container {
+    padding: 2rem 1rem 1.5rem;
   }
 }
 
@@ -612,6 +692,28 @@ blockquote span:hover {
 @media (max-width: 1024px) {
   .masonry-grid {
     column-count: 2;
+  }
+}
+
+/* Small phones: single column masonry */
+@media (max-width: 600px) {
+  .masonry-grid {
+    column-count: 1;
+    column-gap: 0;
+  }
+
+  .masonry-item {
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
+
+  .masonry-item img {
+    border-radius: 12px;
+  }
+
+  .lightbox-image {
+    max-width: 95%;
+    border-radius: 12px;
   }
 }
 

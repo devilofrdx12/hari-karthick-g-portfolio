@@ -51,8 +51,13 @@ export default function FlyingBat({ theme }) {
       lastCursorX.current = e.clientX;
 
       // 2. THE DYNAMIC TRAILING MATH
-      const batWidth = 200;
-      const gap = 5; // Pixels away from the cursor
+      // We must use 200 for the width because the CSS container is 200px wide. 
+      // When the bat flips (scaleX: -1), it mirrors around its 100px center. 
+      // Subtracting the full 200px width keeps the offset perfectly symmetrical!
+      const batWidth = 200; 
+      
+      // gap controls how close it is to the cursor (negative brings it closer)
+      const gap = -20; 
 
       // If moving left, the bat trails on the right side.
       // If moving right, the bat trails on the left side (offset by its width).
@@ -60,8 +65,9 @@ export default function FlyingBat({ theme }) {
         ? e.clientX + gap 
         : e.clientX - batWidth - gap;
 
-      // Keeps the pointer aligned with the top of the bat image + gap
-      const targetY = e.clientY + gap;
+      // Vertical offset to move the bat slightly higher above the cursor
+      const offsetY = -50; // Negative values move it UP
+      const targetY = e.clientY + offsetY;
 
       mouseX.set(targetX); 
       mouseY.set(targetY);

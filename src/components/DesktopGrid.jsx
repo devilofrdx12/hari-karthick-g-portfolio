@@ -256,8 +256,8 @@ export default function DesktopGrid({ theme }) {
       <div className="links-container">
         <div className="links-grid">
           {[
-            { id: "github", label: "github", link: "https://github.com/devilofrdx12", icon: "/images/icon_links.webp" },
-            { id: "linkedin", label: "linkedin", link: "https://www.linkedin.com/in/hari-karthick-g-0d12", icon: "/images/icon_links.webp" },
+            { id: "github", label: "github", link: "https://github.com/devilofrdx12", icon: "/images/icon_links.webp", iconDark: "/images/icon_links_dark.webp" },
+            { id: "linkedin", label: "linkedin", link: "https://www.linkedin.com/in/hari-karthick-g-0d12", icon: "/images/icon_links.webp", iconDark: "/images/icon_links_dark.webp" },
             { id: "instagram", label: "instagram", link: "https://www.instagram.com/_dark_Shades_12_/", icon: "/images/icon_ig_solid_dark.webp", iconDark: "/images/icon_ig_solid.webp" },
           ].map((item) => (
             <a key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className="link-card">

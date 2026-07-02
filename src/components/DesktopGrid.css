@@ -276,7 +276,7 @@ img {
 .links-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 columns like the image */
-  gap: 2rem;
+  gap: 3rem;
   width: 100%;
   justify-items: center;
 }

@@ -141,10 +141,11 @@
 }
 
 /* Ensure mobile stays centered and snapped to bottom (No offset on mobile!) */
-@media (max-width: 768px) {
+@media (max-width: 769px) {
   .modal-links {
-    width: 55vw;
-    height: 70vh;
+    margin: 0 auto; /* Center horizontally */
+    width: 90vw; /* Full width on mobile */
+    height: 10vh; /* Let it expand vertically */
     align-items: center;
   }
 }

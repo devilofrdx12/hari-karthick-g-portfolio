@@ -10,17 +10,9 @@
 .flying-bat-container {
   position: fixed;
   z-index: 99999;
-  
   /*FIX: Force clicks to pass through the container box */
   pointer-events: none !important; 
-}
-
-/* --- 📱 MOBILE SPECIFIC POSITIONING --- */
-.mobile-bat {
-  top: 50%;
-  left: -10px;
-  transform: translateY(-50%);
-  opacity: 0.8; 
+  touch-action: auto;
 }
 
 /* --- DESKTOP ACCELERATION --- */

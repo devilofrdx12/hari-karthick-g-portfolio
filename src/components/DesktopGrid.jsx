@@ -336,16 +336,16 @@ export default function DesktopGrid({ theme }) {
         </div>
       </div>
 
-      {openWindows.map(id => (
+      {items.map(item => (
         <Modal
-          key={id}
-          open
-          title={id}
-          isActive={activeWindow === id}
-          onFocus={() => setActiveWindow(id)}
-          onClose={() => closeWindow(id)}
+          key={item.id}
+          open={openWindows.includes(item.id)}
+          title={item.id}
+          isActive={activeWindow === item.id}
+          onFocus={() => setActiveWindow(item.id)}
+          onClose={() => closeWindow(item.id)}
         >
-          {content[id]}
+          {content[item.id]}
         </Modal>
       ))}
     </>

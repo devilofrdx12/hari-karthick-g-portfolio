@@ -1,7 +1,6 @@
 .modal-container {
   position: fixed;
   inset: 0;
-  pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,7 +103,6 @@
   overflow-y: auto;
   /* Allow native vertical scrolling on touch devices */
   touch-action: pan-y;
-  -webkit-overflow-scrolling: touch;
 }
 
 .modal-content h2 {

@@ -488,7 +488,7 @@ blockquote span:hover {
   .desktop-wrapper {
     padding: 1rem;
     padding-top: 3.5rem; /* Clear the fixed top-left controls */
-    min-height: auto;
+    min-height: 0;
   }
 
   .main-window {
@@ -583,7 +583,6 @@ blockquote span:hover {
     /* Allow scrolling inside the modal on mobile */
     overflow-y: auto;
     max-height: 45vh;
-    -webkit-overflow-scrolling: touch;
   }
 
   .about-body h3 {

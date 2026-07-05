@@ -161,10 +161,11 @@ export default function App() {
         soundOn={soundOn}
         toggleSound={toggleSound}
       />
-      <FlyingBat theme={theme} /> 
+      <FlyingBat theme={theme} />
       <div className="page-container">
         <DesktopGrid theme={theme} />
         <AnimatedWave theme={theme} />
+
         <footer className="footer">
           <p>© 2026 Hari Karthick. Normal portfolio.</p>
         </footer>

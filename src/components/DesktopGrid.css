@@ -33,13 +33,15 @@ img {
   background: var(--bg);
   /* Unified outer outline that perfectly hugs the curves: */
   border-radius: 12px;
-  border: 2px solid var(--window-border); 
+  border: 2px solid var(--window-border);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
-  overflow: hidden; /* This traps the header so it doesn't spill over the curves */
+  overflow: hidden;
+  /* This traps the header so it doesn't spill over the curves */
   transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
-  
+
   position: relative;
-  z-index: 10; /* Ensures the main window is above the flying bat */
+  z-index: 10;
+  /* Ensures the main window is above the flying bat */
 }
 
 .window-bar {
@@ -104,25 +106,25 @@ img {
   .main-window {
     width: 950px;
   }
-  
+
   .window-bar {
     padding: 1rem 2rem;
     font-size: 1.4rem;
   }
-  
+
   .window-content {
     padding: 3.5rem 4rem 4rem;
   }
-  
+
   .window-content h1 {
     font-size: clamp(3rem, 4vw, 4.2rem);
   }
-  
+
   .window-content p {
     font-size: clamp(1.2rem, 1.5vw, 1.4rem);
     margin-bottom: 3.5rem;
   }
-  
+
   .icon-grid {
     margin-top: 5rem;
     gap: 1.5rem;
@@ -182,7 +184,8 @@ img {
   width: 70px;
   height: 70px;
   border-radius: 13px;
-  background: #fff4f8; /*soft pink*/
+  background: #fff4f8;
+  /*soft pink*/
   display: flex;
   align-items: center;
   justify-content: center;
@@ -251,20 +254,19 @@ img {
   font-weight: 500;
   color: var(--text);
   margin: 0;
-  transition: 0.25s ease;
-  transition:
-    transform 0.25s ease,
+  transition: transform 0.25s ease, color 0.3s ease;
 }
 
 .about-name span {
   color: var(--text);
-    transition: 0.25s ease,
-    color 0.3s ease;
+  transition: color 0.3s ease, transform 0.25s ease;
+  display: inline-block;
 }
+
 .about-name span:hover {
   color: var(--accent);
-    transform: scale(10);
 }
+
 .about-sub {
   color: var(--text);
   opacity: 0.75;
@@ -306,7 +308,8 @@ img {
 
 .links-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns like the image */
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 columns like the image */
   gap: 3rem;
   width: 100%;
   justify-items: center;
@@ -328,9 +331,11 @@ img {
 }
 
 .links-hint-box {
-  margin-top: auto; /* Pins to bottom of the 460px window */
+  margin-top: auto;
+  /* Pins to bottom of the 460px window */
   align-self: center;
-  border: 1px solid rgba(0, 0, 0, 0.4); /* Darker border like the image */
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  /* Darker border like the image */
   border-radius: 8px;
   padding: 1.2rem 2.5rem;
   background: rgba(0, 0, 0, 0.02);
@@ -357,7 +362,7 @@ blockquote {
 
 blockquote span {
   color: var(--text);
-  transform: 
+  transform:
     background 0.3s ease,
     color 0.3s ease;
 }
@@ -417,7 +422,8 @@ blockquote span:hover {
 /* LIGHTBOX */
 
 .lightbox-overlay {
-  position: absolute; /* Cover the modal, not the whole screen */
+  position: absolute;
+  /* Cover the modal, not the whole screen */
   inset: 0;
   background: rgba(0, 0, 0, 0.15);
   display: flex;
@@ -428,8 +434,10 @@ blockquote span:hover {
 
 .lightbox-image {
   max-width: 85%;
-  max-height: 85%; /* Use % relative to modal, not vh relative to screen */
-  object-fit: contain; /* Ensure it scales down proportionally */
+  max-height: 85%;
+  /* Use % relative to modal, not vh relative to screen */
+  object-fit: contain;
+  /* Ensure it scales down proportionally */
   border-radius: 20px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
   cursor: grab;
@@ -487,7 +495,8 @@ blockquote span:hover {
 
   .desktop-wrapper {
     padding: 1rem;
-    padding-top: 3.5rem; /* Clear the fixed top-left controls */
+    padding-top: 3.5rem;
+    /* Clear the fixed top-left controls */
     min-height: 0;
   }
 
@@ -507,7 +516,8 @@ blockquote span:hover {
   }
 
   .window-content h1 {
-    font-size: 2.2rem; /* Slightly smaller to prevent excessive wrapping */
+    font-size: 2.2rem;
+    /* Slightly smaller to prevent excessive wrapping */
     line-height: 1.25;
     margin-bottom: 0.2rem;
   }
@@ -519,7 +529,8 @@ blockquote span:hover {
 
   /* ICON GRID 2x2 */
   .icon-grid {
-    margin-top: 1.5rem; /* Override the 4rem desktop margin */
+    margin-top: 1.5rem;
+    /* Override the 4rem desktop margin */
     grid-template-columns: repeat(2, 1fr);
     gap: 0.8rem;
   }
@@ -529,19 +540,22 @@ blockquote span:hover {
     height: 60px;
   }
 
-/*about part*/
+  /*about part*/
 
-.about-header {
+  .about-header {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 32px 20px 20px; /* Exact top spacing */
+    padding: 32px 20px 20px;
+    /* Exact top spacing */
     gap: 12px;
-    border-bottom: none; /* Removes the desktop border to prevent double-lines */
+    border-bottom: none;
+    /* Removes the desktop border to prevent double-lines */
   }
 
   .about-avatar {
-    width: 100px; /* Perfectly scaled down for mobile */
+    width: 100px;
+    /* Perfectly scaled down for mobile */
     height: 100px;
     margin: 0 auto;
   }
@@ -555,14 +569,16 @@ blockquote span:hover {
   }
 
   .about-name {
-    font-size: 1.5rem; /* Prevents awkward wrapping on small phones */
+    font-size: 1.5rem;
+    /* Prevents awkward wrapping on small phones */
     font-weight: 600;
     margin: 0;
     line-height: 1.2;
   }
 
   .about-sub {
-    font-size: 0.9rem; /* Smaller subtitle size */
+    font-size: 0.9rem;
+    /* Smaller subtitle size */
     line-height: 1.4;
     margin: 0;
     opacity: 0.8;
@@ -570,7 +586,8 @@ blockquote span:hover {
   }
 
   .about-divider {
-    margin: 0 20px; /* Gives the horizontal line exact breathing room */
+    margin: 0 20px;
+    /* Gives the horizontal line exact breathing room */
     width: calc(100% - 40px);
   }
 
@@ -579,14 +596,15 @@ blockquote span:hover {
     font-size: 0.95rem;
     line-height: 1.6;
     text-align: left;
-    
+
     /* Allow scrolling inside the modal on mobile */
     overflow-y: auto;
     max-height: 45vh;
   }
 
   .about-body h3 {
-    font-size: 1.1rem; /* Proportional header size */
+    font-size: 1.1rem;
+    /* Proportional header size */
     margin-top: 24px;
     margin-bottom: 8px;
     letter-spacing: 0.5px;
@@ -648,7 +666,7 @@ blockquote span:hover {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  
+
   .links-hint-box {
     padding: 0.8rem 1rem;
     width: 90%;
@@ -746,5 +764,5 @@ blockquote span:hover {
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
-  background: #777;
+  background: var(--bg);
 }

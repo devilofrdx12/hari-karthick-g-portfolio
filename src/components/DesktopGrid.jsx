@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Modal from "./Modal";
 import "./DesktopGrid.css";
@@ -32,40 +32,100 @@ const items = [
 
 function WorkContent() {
   return (
-    <div className="skills-wrapper">
-
-      <h2 className="skills-title">DEVELOPMENT</h2>
-      <div className="skills-grid">
-        {[
-          "C",
-          "C++",
-          "Java",
-          "Python",
-          "React",
-          "Vite",
-          "HTML/CSS",
-          "JavaScript"
-        ].map(skill => (
-          <div key={skill} className="skill-pill">
-            {skill}
-          </div>
-        ))}
+    <div className="work-content-container">
+      {/* 1. Notice Banner */}
+      <div className="work-banner">
+        Accepting work offers via my <a href="mailto:karthickharig12@gmail.com" className="work-email-link">work email!</a>
+        <br />
+        I do illustration, web design, and web/app development. :)
       </div>
 
-      <h2 className="skills-title">TOOLS</h2>
-      <div className="skills-grid">
-        {[
-          "Adobe Premiere Pro",
-          "Blender",
-          "Adobe Photoshop",
-          "Canva"
-        ].map(tool => (
-          <div key={tool} className="skill-pill">
-            {tool}
+      {/* 2. Side-by-Side Layout */}
+      <div className="work-columns">
+        {/* Left Column: Tools */}
+        <div className="work-column">
+          <h2 className="skills-title">TOOLS</h2>
+          <div className="skills-grid">
+            {[
+              "Adobe Premiere Pro",
+              "Blender",
+              "Adobe Photoshop",
+              "Canva",
+              "After Effects"
+            ].map(tool => (
+              <div key={tool} className="skill-pill">
+                {tool}
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* Right Column: Development & Projects */}
+        <div className="work-column">
+          <h2 className="skills-title">DEVELOPMENT</h2>
+          <div className="skills-grid">
+            {[
+              "C",
+              "C++",
+              "Java",
+              "Python",
+              "React",
+              "Vite",
+              "HTML/CSS",
+              "JavaScript"
+            ].map(skill => (
+              <div key={skill} className="skill-pill">
+                {skill}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
+      <div className="projects-container">
+        {/* Placeholder Project Card 1 */}
+        <div className="project-card">
+          <div className="project-image-placeholder">
+            <img src="/gallery/1.jpg" alt="Project 1" loading="eager" decoding="async" />
+          </div>
+          <div className="project-info">
+            <h3 className="project-title">Placeholder Project</h3>
+            <p className="project-desc">
+              This is a placeholder description. You can update this text with details about your actual project!
+            </p>
+            <div className="project-actions">
+              <a href="#" target="_blank" rel="noopener noreferrer" className="project-btn">view project</a>
+            </div>
+          </div>
+        </div>
+
+        {/* Placeholder Project Card 2 */}
+        <div className="project-card">
+          <div className="project-image-placeholder">
+            <img src="/gallery/2.jpg" alt="Project 2" loading="eager" decoding="async" />
+          </div>
+          <div className="project-info">
+            <h3 className="project-title">Another Project</h3>
+            <p className="project-desc">
+              Another placeholder description. Replace this with your actual project details and links!
+            </p>
+            <div className="project-actions">
+              <a href="#" target="_blank" rel="noopener noreferrer" className="project-btn">view project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* 3. Other Dev Projects & GitHub */}
+      <div className="work-footer-section">
+        <h3 className="other-dev-title">Other dev projects:</h3>
+        <ul className="other-dev-list">
+          <li>This website!</li>
+          <li>that's it for now, there are some more projects i'm working on in the background that i'll release soon :)</li>
+        </ul>
+        <p className="github-link-wrapper">
+          See more on <a href="https://github.com/devilofrdx12" target="_blank" rel="noopener noreferrer" className="github-link">GitHub</a>
+        </p>
+      </div>
     </div>
   );
 }
@@ -73,6 +133,15 @@ function WorkContent() {
 function GalleryContent() {
   const [selected, setSelected] = useState(null);
   const [loading, setLoading] = useState(false);
+  const pendingImageRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (pendingImageRef.current) {
+        pendingImageRef.current.onload = null;
+      }
+    };
+  }, []);
 
   const images = [
     "/gallery/1.jpg",
@@ -111,20 +180,24 @@ function GalleryContent() {
     <>
       <div className="masonry-grid">
         {images.map((src, index) => (
-          <div
+          <motion.div
             key={index}
             className="masonry-item"
             whileHover={{ scale: 1.03 }}
             onClick={() => {
               setLoading(true);
+              if (pendingImageRef.current) {
+                pendingImageRef.current.onload = null;
+              }
               const img = new Image();
+              pendingImageRef.current = img;
               img.src = src;
               img.onload = () => {
                 setSelected(src);
                 setLoading(false);
+                pendingImageRef.current = null;
               };
-            }
-            }
+            }}
           >
             <img
               src={src}
@@ -132,7 +205,7 @@ function GalleryContent() {
               loading="lazy"
               decoding="async"
             />
-          </div>
+          </motion.div>
         ))}
       </div>
       <AnimatePresence>
@@ -162,9 +235,12 @@ function GalleryContent() {
 export default function DesktopGrid({ theme }) {
   const [openWindows, setOpenWindows] = useState([]);
   const [activeWindow, setActiveWindow] = useState(null);
+  const desktopRef = useRef(null);
+
   const vibrate = (pattern = [30, 20, 30]) => {
-    if (!("vibrate" in navigator)) return;
-    navigator.vibrate(pattern);
+    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+      navigator.vibrate(pattern);
+    }
   };
 
 
@@ -178,10 +254,13 @@ export default function DesktopGrid({ theme }) {
 
   const closeWindow = (id) => {
     vibrate([15, 10, 15]);
-    setOpenWindows(prev => prev.filter(w => w !== id));
-    if (activeWindow === id) {
-      setActiveWindow(null);
-    }
+    setOpenWindows(prev => {
+      const updated = prev.filter(w => w !== id);
+      if (activeWindow === id) {
+        setActiveWindow(updated.length > 0 ? updated[updated.length - 1] : null);
+      }
+      return updated;
+    });
   };
 
   const content = {
@@ -252,7 +331,7 @@ export default function DesktopGrid({ theme }) {
       </div>
     ),
 
-  links: (
+    links: (
       <div className="links-container">
         <div className="links-grid">
           {[
@@ -277,7 +356,7 @@ export default function DesktopGrid({ theme }) {
 
   return (
     <>
-      <div className="desktop-wrapper">
+      <div className="desktop-wrapper" ref={desktopRef}>
         <div className="main-window">
           <div className="window-bar">Home</div>
 
@@ -344,10 +423,13 @@ export default function DesktopGrid({ theme }) {
           isActive={activeWindow === item.id}
           onFocus={() => setActiveWindow(item.id)}
           onClose={() => closeWindow(item.id)}
+          dragConstraints={desktopRef}
+          initialPosition={item.id === "links" && window.innerWidth >= 769 ? { x: 300, y: 30 } : { x: 0, y: 0 }}
         >
           {content[item.id]}
         </Modal>
       ))}
+
     </>
   );
-}
+}
